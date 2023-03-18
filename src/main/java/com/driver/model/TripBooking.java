@@ -3,55 +3,40 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TripBooking")
-public class TripBooking{
+public class TripBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int tripBookingId;
+    private int tripBookingId;
+    private String fromLocation;
+    private String toLocation;
+    private int distanceInKm;
+    @Enumerated(value = EnumType.STRING)
+    private TripStatus status;
+    private int bill;
 
-    String fromLocation;
-
-    String toLocation;
-
-    int distanceInKm;
-
-    TripStatus status;
-
-    int bill;
-
-
-    //For mapping to customer(parent)
+    //Mapping TripBooking-Customer
     @ManyToOne
     @JoinColumn
-    Customer customer;
-
-    //For mapping to driver(parent)
+    private Customer customer;
+    //Mapping TripBooking-Driver
     @ManyToOne
     @JoinColumn
-    Driver driver;
+    private Driver driver;
+
+
+    // Constructor, Getters & Setters
+
 
     public TripBooking() {
-
-    }
-
-    public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Customer customer, Driver driver) {
-        this.tripBookingId = tripBookingId;
-        this.fromLocation = fromLocation;
-        this.toLocation = toLocation;
-        this.distanceInKm = distanceInKm;
-        this.status = status;
-        this.bill = bill;
-        this.customer = customer;
-        this.driver = driver;
     }
 
     public int getTripBookingId() {
         return tripBookingId;
     }
 
-    public void setTripBookingId(int tripBookingId) {
-        this.tripBookingId = tripBookingId;
-    }
+//    public void setTripBookingId(int tripBookingId) {
+//        this.tripBookingId = tripBookingId;
+//    }
 
     public String getFromLocation() {
         return fromLocation;
@@ -107,5 +92,9 @@ public class TripBooking{
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    public void setTripBookingId(int tripBookingId) {
+        this.tripBookingId = tripBookingId;
     }
 }
